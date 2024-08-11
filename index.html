@@ -1,0 +1,1952 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Местоположение вышек</title>
+            <meta charset="utf-8">
+            <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+            <style>
+                #mapYandex {
+                    width: 100%; 
+                    height: 90vh;
+                }
+                #controls {
+                    text-align: center;
+                    padding: 10px;
+                }
+            </style>
+        </head>
+        <body>
+            <div id="controls">
+                <button onclick="toggleService('Yandex')">Скрыть Yandex</button>
+                <button onclick="toggleService('Mylnikov')">Скрыть Mylnikov</button>
+                <input type="text" id="imeiSearch" placeholder="Введите IMEI для поиска">
+                <button onclick="searchByIMEI()">Найти IMEI</button>
+            </div>
+            <div id="mapYandex"></div>
+            <script type="text/javascript">
+                var myMap;
+                var placemarks = [];
+                var circles = [];
+                var circleVisible = [];
+                var yandexVisible = true;
+                var mylnikovVisible = true;
+
+                ymaps.ready(initYandex);
+                function initYandex() {
+                    myMap = new ymaps.Map("mapYandex", {
+                        center: [55.751244, 37.618423],
+                        zoom: 10
+                    });
+                    
+        var placemark0 = new ymaps.Placemark([55.75392532348633, 37.69996643066406], {
+            balloonContent: 'IMEI: 862430050907506<br>Координаты: 55.75392532348633, 37.69996643066406<br>Радиус: 748.1693115234375 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.69996643066406%2C55.75392532348633&z=15&l=map&pt=37.69996643066406,55.75392532348633,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(0)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle0 = new ymaps.Circle([[55.75392532348633, 37.69996643066406], 748.1693115234375], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark0);
+        placemarks.push(placemark0);
+        circles.push(circle0);
+        circleVisible.push(false);
+    
+
+        var placemark1 = new ymaps.Placemark([55.74592657618, 37.69887942076], {
+            balloonContent: 'IMEI: 862430050907506<br>Координаты: 55.74592657618, 37.69887942076<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.69887942076%2C55.74592657618&z=15&l=map&pt=37.69887942076,55.74592657618,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(1)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle1 = new ymaps.Circle([[55.74592657618, 37.69887942076], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark1);
+        placemarks.push(placemark1);
+        circles.push(circle1);
+        circleVisible.push(false);
+    
+
+        var placemark2 = new ymaps.Placemark([55.60834503173828, 37.353271484375], {
+            balloonContent: 'IMEI: 862430050208616<br>Координаты: 55.60834503173828, 37.353271484375<br>Радиус: 1280.402587890625 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.353271484375%2C55.60834503173828&z=15&l=map&pt=37.353271484375,55.60834503173828,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(2)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle2 = new ymaps.Circle([[55.60834503173828, 37.353271484375], 1280.402587890625], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark2);
+        placemarks.push(placemark2);
+        circles.push(circle2);
+        circleVisible.push(false);
+    
+
+        var placemark3 = new ymaps.Placemark([55.74433271453, 37.6192352872], {
+            balloonContent: 'IMEI: 862430050208616<br>Координаты: 55.74433271453, 37.6192352872<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.6192352872%2C55.74433271453&z=15&l=map&pt=37.6192352872,55.74433271453,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(3)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle3 = new ymaps.Circle([[55.74433271453, 37.6192352872], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark3);
+        placemarks.push(placemark3);
+        circles.push(circle3);
+        circleVisible.push(false);
+    
+
+        var placemark4 = new ymaps.Placemark([55.73635864257812, 37.51230621337891], {
+            balloonContent: 'IMEI: 860103063606157<br>Координаты: 55.73635864257812, 37.51230621337891<br>Радиус: 1296.35595703125 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.51230621337891%2C55.73635864257812&z=15&l=map&pt=37.51230621337891,55.73635864257812,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(4)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle4 = new ymaps.Circle([[55.73635864257812, 37.51230621337891], 1296.35595703125], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark4);
+        placemarks.push(placemark4);
+        circles.push(circle4);
+        circleVisible.push(false);
+    
+
+        var placemark5 = new ymaps.Placemark([55.73343555419, 37.51368087679], {
+            balloonContent: 'IMEI: 860103063606157<br>Координаты: 55.73343555419, 37.51368087679<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.51368087679%2C55.73343555419&z=15&l=map&pt=37.51368087679,55.73343555419,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(5)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle5 = new ymaps.Circle([[55.73343555419, 37.51368087679], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark5);
+        placemarks.push(placemark5);
+        circles.push(circle5);
+        circleVisible.push(false);
+    
+
+        var placemark6 = new ymaps.Placemark([55.75426864624023, 37.62473297119141], {
+            balloonContent: 'IMEI: 861100067999173<br>Координаты: 55.75426864624023, 37.62473297119141<br>Радиус: 533.0498657226562 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.62473297119141%2C55.75426864624023&z=15&l=map&pt=37.62473297119141,55.75426864624023,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(6)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle6 = new ymaps.Circle([[55.75426864624023, 37.62473297119141], 533.0498657226562], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark6);
+        placemarks.push(placemark6);
+        circles.push(circle6);
+        circleVisible.push(false);
+    
+
+        var placemark7 = new ymaps.Placemark([55.75336235698, 37.6220348118], {
+            balloonContent: 'IMEI: 861100067999173<br>Координаты: 55.75336235698, 37.6220348118<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.6220348118%2C55.75336235698&z=15&l=map&pt=37.6220348118,55.75336235698,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(7)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle7 = new ymaps.Circle([[55.75336235698, 37.6220348118], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark7);
+        placemarks.push(placemark7);
+        circles.push(circle7);
+        circleVisible.push(false);
+    
+
+        var placemark8 = new ymaps.Placemark([55.75891494750977, 37.67461013793945], {
+            balloonContent: 'IMEI: 860103063604186<br>Координаты: 55.75891494750977, 37.67461013793945<br>Радиус: 866.7059326171875 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.67461013793945%2C55.75891494750977&z=15&l=map&pt=37.67461013793945,55.75891494750977,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(8)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle8 = new ymaps.Circle([[55.75891494750977, 37.67461013793945], 866.7059326171875], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark8);
+        placemarks.push(placemark8);
+        circles.push(circle8);
+        circleVisible.push(false);
+    
+
+        var placemark9 = new ymaps.Placemark([55.76226863186, 37.67188024718], {
+            balloonContent: 'IMEI: 860103063604186<br>Координаты: 55.76226863186, 37.67188024718<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.67188024718%2C55.76226863186&z=15&l=map&pt=37.67188024718,55.76226863186,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(9)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle9 = new ymaps.Circle([[55.76226863186, 37.67188024718], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark9);
+        placemarks.push(placemark9);
+        circles.push(circle9);
+        circleVisible.push(false);
+    
+
+        var placemark10 = new ymaps.Placemark([55.77022552490234, 37.58435440063477], {
+            balloonContent: 'IMEI: 862430050208004<br>Координаты: 55.77022552490234, 37.58435440063477<br>Радиус: 867.5798950195312 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.58435440063477%2C55.77022552490234&z=15&l=map&pt=37.58435440063477,55.77022552490234,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(10)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle10 = new ymaps.Circle([[55.77022552490234, 37.58435440063477], 867.5798950195312], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark10);
+        placemarks.push(placemark10);
+        circles.push(circle10);
+        circleVisible.push(false);
+    
+
+        var placemark11 = new ymaps.Placemark([55.77180228292, 37.59141432255], {
+            balloonContent: 'IMEI: 862430050208004<br>Координаты: 55.77180228292, 37.59141432255<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.59141432255%2C55.77180228292&z=15&l=map&pt=37.59141432255,55.77180228292,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(11)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle11 = new ymaps.Circle([[55.77180228292, 37.59141432255], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark11);
+        placemarks.push(placemark11);
+        circles.push(circle11);
+        circleVisible.push(false);
+    
+
+        var placemark12 = new ymaps.Placemark([55.73323059082031, 37.58712387084961], {
+            balloonContent: 'IMEI: 860103063603535<br>Координаты: 55.73323059082031, 37.58712387084961<br>Радиус: 821.9295654296875 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.58712387084961%2C55.73323059082031&z=15&l=map&pt=37.58712387084961,55.73323059082031,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(12)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle12 = new ymaps.Circle([[55.73323059082031, 37.58712387084961], 821.9295654296875], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark12);
+        placemarks.push(placemark12);
+        circles.push(circle12);
+        circleVisible.push(false);
+    
+
+        var placemark13 = new ymaps.Placemark([55.73340703824, 37.58758049044], {
+            balloonContent: 'IMEI: 860103063603535<br>Координаты: 55.73340703824, 37.58758049044<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.58758049044%2C55.73340703824&z=15&l=map&pt=37.58758049044,55.73340703824,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(13)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle13 = new ymaps.Circle([[55.73340703824, 37.58758049044], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark13);
+        placemarks.push(placemark13);
+        circles.push(circle13);
+        circleVisible.push(false);
+    
+
+        var placemark14 = new ymaps.Placemark([55.74576950073242, 37.5806999206543], {
+            balloonContent: 'IMEI: 860103063738448<br>Координаты: 55.74576950073242, 37.5806999206543<br>Радиус: 518.6947631835938 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.5806999206543%2C55.74576950073242&z=15&l=map&pt=37.5806999206543,55.74576950073242,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(14)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle14 = new ymaps.Circle([[55.74576950073242, 37.5806999206543], 518.6947631835938], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark14);
+        placemarks.push(placemark14);
+        circles.push(circle14);
+        circleVisible.push(false);
+    
+
+        var placemark15 = new ymaps.Placemark([55.74628685855, 37.58090595743], {
+            balloonContent: 'IMEI: 860103063738448<br>Координаты: 55.74628685855, 37.58090595743<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.58090595743%2C55.74628685855&z=15&l=map&pt=37.58090595743,55.74628685855,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(15)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle15 = new ymaps.Circle([[55.74628685855, 37.58090595743], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark15);
+        placemarks.push(placemark15);
+        circles.push(circle15);
+        circleVisible.push(false);
+    
+
+        var placemark16 = new ymaps.Placemark([59.94046020507812, 30.31770133972168], {
+            balloonContent: 'IMEI: 862430050911078<br>Координаты: 59.94046020507812, 30.31770133972168<br>Радиус: 704.7430419921875 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=30.31770133972168%2C59.94046020507812&z=15&l=map&pt=30.31770133972168,59.94046020507812,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(16)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle16 = new ymaps.Circle([[59.94046020507812, 30.31770133972168], 704.7430419921875], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark16);
+        placemarks.push(placemark16);
+        circles.push(circle16);
+        circleVisible.push(false);
+    
+
+        var placemark17 = new ymaps.Placemark([59.93747867738, 30.31664018642], {
+            balloonContent: 'IMEI: 862430050911078<br>Координаты: 59.93747867738, 30.31664018642<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=30.31664018642%2C59.93747867738&z=15&l=map&pt=30.31664018642,59.93747867738,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(17)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle17 = new ymaps.Circle([[59.93747867738, 30.31664018642], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark17);
+        placemarks.push(placemark17);
+        circles.push(circle17);
+        circleVisible.push(false);
+    
+
+        var placemark18 = new ymaps.Placemark([55.73834991455078, 37.53757095336914], {
+            balloonContent: 'IMEI: 861100067851440<br>Координаты: 55.73834991455078, 37.53757095336914<br>Радиус: 1332.073486328125 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.53757095336914%2C55.73834991455078&z=15&l=map&pt=37.53757095336914,55.73834991455078,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(18)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle18 = new ymaps.Circle([[55.73834991455078, 37.53757095336914], 1332.073486328125], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark18);
+        placemarks.push(placemark18);
+        circles.push(circle18);
+        circleVisible.push(false);
+    
+
+        var placemark19 = new ymaps.Placemark([55.7365494592, 37.53038580037], {
+            balloonContent: 'IMEI: 861100067851440<br>Координаты: 55.7365494592, 37.53038580037<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.53038580037%2C55.7365494592&z=15&l=map&pt=37.53038580037,55.7365494592,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(19)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle19 = new ymaps.Circle([[55.7365494592, 37.53038580037], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark19);
+        placemarks.push(placemark19);
+        circles.push(circle19);
+        circleVisible.push(false);
+    
+
+        var placemark20 = new ymaps.Placemark([55.76199722290039, 37.7032356262207], {
+            balloonContent: 'IMEI: 862430050908330<br>Координаты: 55.76199722290039, 37.7032356262207<br>Радиус: 703.3240356445312 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.7032356262207%2C55.76199722290039&z=15&l=map&pt=37.7032356262207,55.76199722290039,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(20)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle20 = new ymaps.Circle([[55.76199722290039, 37.7032356262207], 703.3240356445312], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark20);
+        placemarks.push(placemark20);
+        circles.push(circle20);
+        circleVisible.push(false);
+    
+
+        var placemark21 = new ymaps.Placemark([55.76477685776, 37.70197395084], {
+            balloonContent: 'IMEI: 862430050908330<br>Координаты: 55.76477685776, 37.70197395084<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.70197395084%2C55.76477685776&z=15&l=map&pt=37.70197395084,55.76477685776,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(21)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle21 = new ymaps.Circle([[55.76477685776, 37.70197395084], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark21);
+        placemarks.push(placemark21);
+        circles.push(circle21);
+        circleVisible.push(false);
+    
+
+        var placemark22 = new ymaps.Placemark([59.89569091796875, 30.2750358581543], {
+            balloonContent: 'IMEI: 860103063257266<br>Координаты: 59.89569091796875, 30.2750358581543<br>Радиус: 669.7858276367188 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=30.2750358581543%2C59.89569091796875&z=15&l=map&pt=30.2750358581543,59.89569091796875,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(22)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle22 = new ymaps.Circle([[59.89569091796875, 30.2750358581543], 669.7858276367188], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark22);
+        placemarks.push(placemark22);
+        circles.push(circle22);
+        circleVisible.push(false);
+    
+
+        var placemark23 = new ymaps.Placemark([59.89589226793, 30.27390123852], {
+            balloonContent: 'IMEI: 860103063257266<br>Координаты: 59.89589226793, 30.27390123852<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=30.27390123852%2C59.89589226793&z=15&l=map&pt=30.27390123852,59.89589226793,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(23)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle23 = new ymaps.Circle([[59.89589226793, 30.27390123852], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark23);
+        placemarks.push(placemark23);
+        circles.push(circle23);
+        circleVisible.push(false);
+    
+
+        var placemark24 = new ymaps.Placemark([59.940673828125, 30.30646896362305], {
+            balloonContent: 'IMEI: 861100067830683<br>Координаты: 59.940673828125, 30.30646896362305<br>Радиус: 638.6200561523438 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=30.30646896362305%2C59.940673828125&z=15&l=map&pt=30.30646896362305,59.940673828125,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(24)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle24 = new ymaps.Circle([[59.940673828125, 30.30646896362305], 638.6200561523438], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark24);
+        placemarks.push(placemark24);
+        circles.push(circle24);
+        circleVisible.push(false);
+    
+
+        var placemark25 = new ymaps.Placemark([59.94373568101, 30.30556786874], {
+            balloonContent: 'IMEI: 861100067830683<br>Координаты: 59.94373568101, 30.30556786874<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=30.30556786874%2C59.94373568101&z=15&l=map&pt=30.30556786874,59.94373568101,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(25)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle25 = new ymaps.Circle([[59.94373568101, 30.30556786874], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark25);
+        placemarks.push(placemark25);
+        circles.push(circle25);
+        circleVisible.push(false);
+    
+
+        var placemark26 = new ymaps.Placemark([55.76351165771484, 37.61959838867188], {
+            balloonContent: 'IMEI: 860103063346861<br>Координаты: 55.76351165771484, 37.61959838867188<br>Радиус: 631.5941162109375 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.61959838867188%2C55.76351165771484&z=15&l=map&pt=37.61959838867188,55.76351165771484,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(26)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle26 = new ymaps.Circle([[55.76351165771484, 37.61959838867188], 631.5941162109375], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark26);
+        placemarks.push(placemark26);
+        circles.push(circle26);
+        circleVisible.push(false);
+    
+
+        var placemark27 = new ymaps.Placemark([55.76228847145, 37.61908976859], {
+            balloonContent: 'IMEI: 860103063346861<br>Координаты: 55.76228847145, 37.61908976859<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.61908976859%2C55.76228847145&z=15&l=map&pt=37.61908976859,55.76228847145,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(27)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle27 = new ymaps.Circle([[55.76228847145, 37.61908976859], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark27);
+        placemarks.push(placemark27);
+        circles.push(circle27);
+        circleVisible.push(false);
+    
+
+        var placemark28 = new ymaps.Placemark([55.73635864257812, 37.51230621337891], {
+            balloonContent: 'IMEI: 860103063101837<br>Координаты: 55.73635864257812, 37.51230621337891<br>Радиус: 1296.35595703125 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.51230621337891%2C55.73635864257812&z=15&l=map&pt=37.51230621337891,55.73635864257812,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(28)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle28 = new ymaps.Circle([[55.73635864257812, 37.51230621337891], 1296.35595703125], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark28);
+        placemarks.push(placemark28);
+        circles.push(circle28);
+        circleVisible.push(false);
+    
+
+        var placemark29 = new ymaps.Placemark([55.73343555419, 37.51368087679], {
+            balloonContent: 'IMEI: 860103063101837<br>Координаты: 55.73343555419, 37.51368087679<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.51368087679%2C55.73343555419&z=15&l=map&pt=37.51368087679,55.73343555419,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(29)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle29 = new ymaps.Circle([[55.73343555419, 37.51368087679], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark29);
+        placemarks.push(placemark29);
+        circles.push(circle29);
+        circleVisible.push(false);
+    
+
+        var placemark30 = new ymaps.Placemark([59.93672943115234, 30.30131340026855], {
+            balloonContent: 'IMEI: 861100067930467<br>Координаты: 59.93672943115234, 30.30131340026855<br>Радиус: 1220.765625 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=30.30131340026855%2C59.93672943115234&z=15&l=map&pt=30.30131340026855,59.93672943115234,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(30)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle30 = new ymaps.Circle([[59.93672943115234, 30.30131340026855], 1220.765625], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark30);
+        placemarks.push(placemark30);
+        circles.push(circle30);
+        circleVisible.push(false);
+    
+
+        var placemark31 = new ymaps.Placemark([59.93987354811, 30.2990030768], {
+            balloonContent: 'IMEI: 861100067930467<br>Координаты: 59.93987354811, 30.2990030768<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=30.2990030768%2C59.93987354811&z=15&l=map&pt=30.2990030768,59.93987354811,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(31)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle31 = new ymaps.Circle([[59.93987354811, 30.2990030768], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark31);
+        placemarks.push(placemark31);
+        circles.push(circle31);
+        circleVisible.push(false);
+    
+
+        var placemark32 = new ymaps.Placemark([55.7689323425293, 37.56289672851562], {
+            balloonContent: 'IMEI: 862430052688054<br>Координаты: 55.7689323425293, 37.56289672851562<br>Радиус: 750.0269165039062 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.56289672851562%2C55.7689323425293&z=15&l=map&pt=37.56289672851562,55.7689323425293,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(32)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle32 = new ymaps.Circle([[55.7689323425293, 37.56289672851562], 750.0269165039062], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark32);
+        placemarks.push(placemark32);
+        circles.push(circle32);
+        circleVisible.push(false);
+    
+
+        var placemark33 = new ymaps.Placemark([55.77070684137, 37.56492154351], {
+            balloonContent: 'IMEI: 862430052688054<br>Координаты: 55.77070684137, 37.56492154351<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.56492154351%2C55.77070684137&z=15&l=map&pt=37.56492154351,55.77070684137,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(33)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle33 = new ymaps.Circle([[55.77070684137, 37.56492154351], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark33);
+        placemarks.push(placemark33);
+        circles.push(circle33);
+        circleVisible.push(false);
+    
+
+        var placemark34 = new ymaps.Placemark([55.74581909179688, 37.61826705932617], {
+            balloonContent: 'IMEI: 862430054346578<br>Координаты: 55.74581909179688, 37.61826705932617<br>Радиус: 727.8280029296875 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.61826705932617%2C55.74581909179688&z=15&l=map&pt=37.61826705932617,55.74581909179688,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(34)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle34 = new ymaps.Circle([[55.74581909179688, 37.61826705932617], 727.8280029296875], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark34);
+        placemarks.push(placemark34);
+        circles.push(circle34);
+        circleVisible.push(false);
+    
+
+        var placemark35 = new ymaps.Placemark([55.73662703128, 37.60549768721], {
+            balloonContent: 'IMEI: 862430054346578<br>Координаты: 55.73662703128, 37.60549768721<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.60549768721%2C55.73662703128&z=15&l=map&pt=37.60549768721,55.73662703128,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(35)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle35 = new ymaps.Circle([[55.73662703128, 37.60549768721], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark35);
+        placemarks.push(placemark35);
+        circles.push(circle35);
+        circleVisible.push(false);
+    
+
+        var placemark36 = new ymaps.Placemark([55.75566864013672, 37.59320449829102], {
+            balloonContent: 'IMEI: 860103063403985<br>Координаты: 55.75566864013672, 37.59320449829102<br>Радиус: 656.20068359375 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.59320449829102%2C55.75566864013672&z=15&l=map&pt=37.59320449829102,55.75566864013672,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(36)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle36 = new ymaps.Circle([[55.75566864013672, 37.59320449829102], 656.20068359375], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark36);
+        placemarks.push(placemark36);
+        circles.push(circle36);
+        circleVisible.push(false);
+    
+
+        var placemark37 = new ymaps.Placemark([55.75338728139, 37.58849491245], {
+            balloonContent: 'IMEI: 860103063403985<br>Координаты: 55.75338728139, 37.58849491245<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.58849491245%2C55.75338728139&z=15&l=map&pt=37.58849491245,55.75338728139,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(37)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle37 = new ymaps.Circle([[55.75338728139, 37.58849491245], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark37);
+        placemarks.push(placemark37);
+        circles.push(circle37);
+        circleVisible.push(false);
+    
+
+        var placemark38 = new ymaps.Placemark([55.73218154907227, 37.63862609863281], {
+            balloonContent: 'IMEI: 861100067959623<br>Координаты: 55.73218154907227, 37.63862609863281<br>Радиус: 671.560302734375 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.63862609863281%2C55.73218154907227&z=15&l=map&pt=37.63862609863281,55.73218154907227,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(38)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle38 = new ymaps.Circle([[55.73218154907227, 37.63862609863281], 671.560302734375], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark38);
+        placemarks.push(placemark38);
+        circles.push(circle38);
+        circleVisible.push(false);
+    
+
+        var placemark39 = new ymaps.Placemark([55.73329988964, 37.63548780984], {
+            balloonContent: 'IMEI: 861100067959623<br>Координаты: 55.73329988964, 37.63548780984<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.63548780984%2C55.73329988964&z=15&l=map&pt=37.63548780984,55.73329988964,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(39)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle39 = new ymaps.Circle([[55.73329988964, 37.63548780984], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark39);
+        placemarks.push(placemark39);
+        circles.push(circle39);
+        circleVisible.push(false);
+    
+
+        var placemark40 = new ymaps.Placemark([55.7166862487793, 37.66392135620117], {
+            balloonContent: 'IMEI: 862430054350364<br>Координаты: 55.7166862487793, 37.66392135620117<br>Радиус: 977.528564453125 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.66392135620117%2C55.7166862487793&z=15&l=map&pt=37.66392135620117,55.7166862487793,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(40)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle40 = new ymaps.Circle([[55.7166862487793, 37.66392135620117], 977.528564453125], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark40);
+        placemarks.push(placemark40);
+        circles.push(circle40);
+        circleVisible.push(false);
+    
+
+        var placemark41 = new ymaps.Placemark([55.71597445694, 37.6673446823], {
+            balloonContent: 'IMEI: 862430054350364<br>Координаты: 55.71597445694, 37.6673446823<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.6673446823%2C55.71597445694&z=15&l=map&pt=37.6673446823,55.71597445694,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(41)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle41 = new ymaps.Circle([[55.71597445694, 37.6673446823], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark41);
+        placemarks.push(placemark41);
+        circles.push(circle41);
+        circleVisible.push(false);
+    
+
+        var placemark42 = new ymaps.Placemark([55.73522186279297, 37.66134262084961], {
+            balloonContent: 'IMEI: 862430054350851<br>Координаты: 55.73522186279297, 37.66134262084961<br>Радиус: 799.9885864257812 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.66134262084961%2C55.73522186279297&z=15&l=map&pt=37.66134262084961,55.73522186279297,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(42)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle42 = new ymaps.Circle([[55.73522186279297, 37.66134262084961], 799.9885864257812], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark42);
+        placemarks.push(placemark42);
+        circles.push(circle42);
+        circleVisible.push(false);
+    
+
+        var placemark43 = new ymaps.Placemark([55.73177382928, 37.66779124245], {
+            balloonContent: 'IMEI: 862430054350851<br>Координаты: 55.73177382928, 37.66779124245<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.66779124245%2C55.73177382928&z=15&l=map&pt=37.66779124245,55.73177382928,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(43)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle43 = new ymaps.Circle([[55.73177382928, 37.66779124245], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark43);
+        placemarks.push(placemark43);
+        circles.push(circle43);
+        circleVisible.push(false);
+    
+
+        var placemark44 = new ymaps.Placemark([55.74580001831055, 37.63475036621094], {
+            balloonContent: 'IMEI: 862430056007616<br>Координаты: 55.74580001831055, 37.63475036621094<br>Радиус: 755.3345336914062 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.63475036621094%2C55.74580001831055&z=15&l=map&pt=37.63475036621094,55.74580001831055,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(44)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle44 = new ymaps.Circle([[55.74580001831055, 37.63475036621094], 755.3345336914062], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark44);
+        placemarks.push(placemark44);
+        circles.push(circle44);
+        circleVisible.push(false);
+    
+
+        var placemark45 = new ymaps.Placemark([55.74818579825, 37.63282220589], {
+            balloonContent: 'IMEI: 862430056007616<br>Координаты: 55.74818579825, 37.63282220589<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.63282220589%2C55.74818579825&z=15&l=map&pt=37.63282220589,55.74818579825,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(45)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle45 = new ymaps.Circle([[55.74818579825, 37.63282220589], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark45);
+        placemarks.push(placemark45);
+        circles.push(circle45);
+        circleVisible.push(false);
+    
+
+        var placemark46 = new ymaps.Placemark([55.70871734619141, 37.45758819580078], {
+            balloonContent: 'IMEI: 862430054359969<br>Координаты: 55.70871734619141, 37.45758819580078<br>Радиус: 1073.313598632812 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.45758819580078%2C55.70871734619141&z=15&l=map&pt=37.45758819580078,55.70871734619141,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(46)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle46 = new ymaps.Circle([[55.70871734619141, 37.45758819580078], 1073.313598632812], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark46);
+        placemarks.push(placemark46);
+        circles.push(circle46);
+        circleVisible.push(false);
+    
+
+        var placemark47 = new ymaps.Placemark([55.68993642245, 37.46042978731], {
+            balloonContent: 'IMEI: 862430054359969<br>Координаты: 55.68993642245, 37.46042978731<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.46042978731%2C55.68993642245&z=15&l=map&pt=37.46042978731,55.68993642245,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(47)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle47 = new ymaps.Circle([[55.68993642245, 37.46042978731], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark47);
+        placemarks.push(placemark47);
+        circles.push(circle47);
+        circleVisible.push(false);
+    
+
+        var placemark48 = new ymaps.Placemark([59.8535041809082, 30.42255783081055], {
+            balloonContent: 'IMEI: 862531045603058<br>Координаты: 59.8535041809082, 30.42255783081055<br>Радиус: 1394.9609375 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=30.42255783081055%2C59.8535041809082&z=15&l=map&pt=30.42255783081055,59.8535041809082,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(48)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle48 = new ymaps.Circle([[59.8535041809082, 30.42255783081055], 1394.9609375], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark48);
+        placemarks.push(placemark48);
+        circles.push(circle48);
+        circleVisible.push(false);
+    
+
+        var placemark49 = new ymaps.Placemark([59.84988950311, 30.41787862491], {
+            balloonContent: 'IMEI: 862531045603058<br>Координаты: 59.84988950311, 30.41787862491<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=30.41787862491%2C59.84988950311&z=15&l=map&pt=30.41787862491,59.84988950311,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(49)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle49 = new ymaps.Circle([[59.84988950311, 30.41787862491], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark49);
+        placemarks.push(placemark49);
+        circles.push(circle49);
+        circleVisible.push(false);
+    
+
+        var placemark50 = new ymaps.Placemark([55.53113174438477, 38.874755859375], {
+            balloonContent: 'IMEI: 862430055912105<br>Координаты: 55.53113174438477, 38.874755859375<br>Радиус: 100000.0 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=38.874755859375%2C55.53113174438477&z=15&l=map&pt=38.874755859375,55.53113174438477,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(50)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle50 = new ymaps.Circle([[55.53113174438477, 38.874755859375], 100000.0], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark50);
+        placemarks.push(placemark50);
+        circles.push(circle50);
+        circleVisible.push(false);
+    
+
+        var placemark51 = new ymaps.Placemark([55.75582486685, 37.54759550063], {
+            balloonContent: 'IMEI: 862430055912105<br>Координаты: 55.75582486685, 37.54759550063<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.54759550063%2C55.75582486685&z=15&l=map&pt=37.54759550063,55.75582486685,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(51)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle51 = new ymaps.Circle([[55.75582486685, 37.54759550063], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark51);
+        placemarks.push(placemark51);
+        circles.push(circle51);
+        circleVisible.push(false);
+    
+
+        var placemark52 = new ymaps.Placemark([55.73302841186523, 37.62562561035156], {
+            balloonContent: 'IMEI: 862430056036904<br>Координаты: 55.73302841186523, 37.62562561035156<br>Радиус: 778.23486328125 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.62562561035156%2C55.73302841186523&z=15&l=map&pt=37.62562561035156,55.73302841186523,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(52)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle52 = new ymaps.Circle([[55.73302841186523, 37.62562561035156], 778.23486328125], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark52);
+        placemarks.push(placemark52);
+        circles.push(circle52);
+        circleVisible.push(false);
+    
+
+        var placemark53 = new ymaps.Placemark([55.73748442381, 37.62427968588], {
+            balloonContent: 'IMEI: 862430056036904<br>Координаты: 55.73748442381, 37.62427968588<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.62427968588%2C55.73748442381&z=15&l=map&pt=37.62427968588,55.73748442381,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(53)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle53 = new ymaps.Circle([[55.73748442381, 37.62427968588], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark53);
+        placemarks.push(placemark53);
+        circles.push(circle53);
+        circleVisible.push(false);
+    
+
+        var placemark54 = new ymaps.Placemark([55.74352645874023, 37.60491943359375], {
+            balloonContent: 'IMEI: 862430056686500<br>Координаты: 55.74352645874023, 37.60491943359375<br>Радиус: 695.3339233398438 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.60491943359375%2C55.74352645874023&z=15&l=map&pt=37.60491943359375,55.74352645874023,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(54)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle54 = new ymaps.Circle([[55.74352645874023, 37.60491943359375], 695.3339233398438], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark54);
+        placemarks.push(placemark54);
+        circles.push(circle54);
+        circleVisible.push(false);
+    
+
+        var placemark55 = new ymaps.Placemark([55.74253011029, 37.61292382192], {
+            balloonContent: 'IMEI: 862430056686500<br>Координаты: 55.74253011029, 37.61292382192<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.61292382192%2C55.74253011029&z=15&l=map&pt=37.61292382192,55.74253011029,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(55)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle55 = new ymaps.Circle([[55.74253011029, 37.61292382192], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark55);
+        placemarks.push(placemark55);
+        circles.push(circle55);
+        circleVisible.push(false);
+    
+
+        var placemark56 = new ymaps.Placemark([55.7724494934082, 37.54612350463867], {
+            balloonContent: 'IMEI: 862531047209151<br>Координаты: 55.7724494934082, 37.54612350463867<br>Радиус: 922.2431030273438 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.54612350463867%2C55.7724494934082&z=15&l=map&pt=37.54612350463867,55.7724494934082,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(56)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle56 = new ymaps.Circle([[55.7724494934082, 37.54612350463867], 922.2431030273438], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark56);
+        placemarks.push(placemark56);
+        circles.push(circle56);
+        circleVisible.push(false);
+    
+
+        var placemark57 = new ymaps.Placemark([55.77950901159, 37.56678614431], {
+            balloonContent: 'IMEI: 862531047209151<br>Координаты: 55.77950901159, 37.56678614431<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.56678614431%2C55.77950901159&z=15&l=map&pt=37.56678614431,55.77950901159,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(57)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle57 = new ymaps.Circle([[55.77950901159, 37.56678614431], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark57);
+        placemarks.push(placemark57);
+        circles.push(circle57);
+        circleVisible.push(false);
+    
+
+        var placemark58 = new ymaps.Placemark([55.74774932861328, 37.60714721679688], {
+            balloonContent: 'IMEI: 864626047747875<br>Координаты: 55.74774932861328, 37.60714721679688<br>Радиус: 1029.536499023438 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.60714721679688%2C55.74774932861328&z=15&l=map&pt=37.60714721679688,55.74774932861328,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(58)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle58 = new ymaps.Circle([[55.74774932861328, 37.60714721679688], 1029.536499023438], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark58);
+        placemarks.push(placemark58);
+        circles.push(circle58);
+        circleVisible.push(false);
+    
+
+        var placemark59 = new ymaps.Placemark([55.7459058904, 37.61433893404], {
+            balloonContent: 'IMEI: 864626047747875<br>Координаты: 55.7459058904, 37.61433893404<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.61433893404%2C55.7459058904&z=15&l=map&pt=37.61433893404,55.7459058904,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(59)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle59 = new ymaps.Circle([[55.7459058904, 37.61433893404], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark59);
+        placemarks.push(placemark59);
+        circles.push(circle59);
+        circleVisible.push(false);
+    
+
+        var placemark60 = new ymaps.Placemark([55.81741333007812, 37.71138000488281], {
+            balloonContent: 'IMEI: 862531047165197<br>Координаты: 55.81741333007812, 37.71138000488281<br>Радиус: 799.7012939453125 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.71138000488281%2C55.81741333007812&z=15&l=map&pt=37.71138000488281,55.81741333007812,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(60)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle60 = new ymaps.Circle([[55.81741333007812, 37.71138000488281], 799.7012939453125], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark60);
+        placemarks.push(placemark60);
+        circles.push(circle60);
+        circleVisible.push(false);
+    
+
+        var placemark61 = new ymaps.Placemark([55.81806172697, 37.71107647521], {
+            balloonContent: 'IMEI: 862531047165197<br>Координаты: 55.81806172697, 37.71107647521<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.71107647521%2C55.81806172697&z=15&l=map&pt=37.71107647521,55.81806172697,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(61)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle61 = new ymaps.Circle([[55.81806172697, 37.71107647521], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark61);
+        placemarks.push(placemark61);
+        circles.push(circle61);
+        circleVisible.push(false);
+    
+
+        var placemark62 = new ymaps.Placemark([55.74198532104492, 37.61520385742188], {
+            balloonContent: 'IMEI: 862531047187654<br>Координаты: 55.74198532104492, 37.61520385742188<br>Радиус: 723.3851318359375 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.61520385742188%2C55.74198532104492&z=15&l=map&pt=37.61520385742188,55.74198532104492,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(62)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle62 = new ymaps.Circle([[55.74198532104492, 37.61520385742188], 723.3851318359375], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark62);
+        placemarks.push(placemark62);
+        circles.push(circle62);
+        circleVisible.push(false);
+    
+
+        var placemark63 = new ymaps.Placemark([55.73821813791, 37.61610642958], {
+            balloonContent: 'IMEI: 862531047187654<br>Координаты: 55.73821813791, 37.61610642958<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.61610642958%2C55.73821813791&z=15&l=map&pt=37.61610642958,55.73821813791,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(63)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle63 = new ymaps.Circle([[55.73821813791, 37.61610642958], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark63);
+        placemarks.push(placemark63);
+        circles.push(circle63);
+        circleVisible.push(false);
+    
+
+        var placemark64 = new ymaps.Placemark([55.72925567626953, 37.61349868774414], {
+            balloonContent: 'IMEI: 864626045075352<br>Координаты: 55.72925567626953, 37.61349868774414<br>Радиус: 918.6592407226562 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.61349868774414%2C55.72925567626953&z=15&l=map&pt=37.61349868774414,55.72925567626953,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(64)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle64 = new ymaps.Circle([[55.72925567626953, 37.61349868774414], 918.6592407226562], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark64);
+        placemarks.push(placemark64);
+        circles.push(circle64);
+        circleVisible.push(false);
+    
+
+        var placemark65 = new ymaps.Placemark([55.72785063362, 37.61364587465], {
+            balloonContent: 'IMEI: 864626045075352<br>Координаты: 55.72785063362, 37.61364587465<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.61364587465%2C55.72785063362&z=15&l=map&pt=37.61364587465,55.72785063362,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(65)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle65 = new ymaps.Circle([[55.72785063362, 37.61364587465], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark65);
+        placemarks.push(placemark65);
+        circles.push(circle65);
+        circleVisible.push(false);
+    
+
+        var placemark66 = new ymaps.Placemark([55.76175689697266, 37.68798828125], {
+            balloonContent: 'IMEI: 866011051382042<br>Координаты: 55.76175689697266, 37.68798828125<br>Радиус: 185.9250030517578 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.68798828125%2C55.76175689697266&z=15&l=map&pt=37.68798828125,55.76175689697266,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(66)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle66 = new ymaps.Circle([[55.76175689697266, 37.68798828125], 185.9250030517578], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark66);
+        placemarks.push(placemark66);
+        circles.push(circle66);
+        circleVisible.push(false);
+    
+
+        var placemark67 = new ymaps.Placemark([55.74327190263, 37.72107247464], {
+            balloonContent: 'IMEI: 866011051382042<br>Координаты: 55.74327190263, 37.72107247464<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.72107247464%2C55.74327190263&z=15&l=map&pt=37.72107247464,55.74327190263,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(67)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle67 = new ymaps.Circle([[55.74327190263, 37.72107247464], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark67);
+        placemarks.push(placemark67);
+        circles.push(circle67);
+        circleVisible.push(false);
+    
+
+        var placemark68 = new ymaps.Placemark([55.53113174438477, 38.874755859375], {
+            balloonContent: 'IMEI: 864626047738478<br>Координаты: 55.53113174438477, 38.874755859375<br>Радиус: 100000.0 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=38.874755859375%2C55.53113174438477&z=15&l=map&pt=38.874755859375,55.53113174438477,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(68)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle68 = new ymaps.Circle([[55.53113174438477, 38.874755859375], 100000.0], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark68);
+        placemarks.push(placemark68);
+        circles.push(circle68);
+        circleVisible.push(false);
+    
+
+        var placemark69 = new ymaps.Placemark([55.74840756503, 37.4119354852], {
+            balloonContent: 'IMEI: 864626047738478<br>Координаты: 55.74840756503, 37.4119354852<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.4119354852%2C55.74840756503&z=15&l=map&pt=37.4119354852,55.74840756503,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(69)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle69 = new ymaps.Circle([[55.74840756503, 37.4119354852], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark69);
+        placemarks.push(placemark69);
+        circles.push(circle69);
+        circleVisible.push(false);
+    
+
+        var placemark70 = new ymaps.Placemark([55.73458099365234, 37.64499282836914], {
+            balloonContent: 'IMEI: 864626045058895<br>Координаты: 55.73458099365234, 37.64499282836914<br>Радиус: 1023.790466308594 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.64499282836914%2C55.73458099365234&z=15&l=map&pt=37.64499282836914,55.73458099365234,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(70)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle70 = new ymaps.Circle([[55.73458099365234, 37.64499282836914], 1023.790466308594], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark70);
+        placemarks.push(placemark70);
+        circles.push(circle70);
+        circleVisible.push(false);
+    
+
+        var placemark71 = new ymaps.Placemark([55.7270082809, 37.63567846128], {
+            balloonContent: 'IMEI: 864626045058895<br>Координаты: 55.7270082809, 37.63567846128<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.63567846128%2C55.7270082809&z=15&l=map&pt=37.63567846128,55.7270082809,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(71)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle71 = new ymaps.Circle([[55.7270082809, 37.63567846128], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark71);
+        placemarks.push(placemark71);
+        circles.push(circle71);
+        circleVisible.push(false);
+    
+
+        var placemark72 = new ymaps.Placemark([55.74687576293945, 37.64805221557617], {
+            balloonContent: 'IMEI: 864626047754236<br>Координаты: 55.74687576293945, 37.64805221557617<br>Радиус: 597.8775634765625 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.64805221557617%2C55.74687576293945&z=15&l=map&pt=37.64805221557617,55.74687576293945,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(72)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle72 = new ymaps.Circle([[55.74687576293945, 37.64805221557617], 597.8775634765625], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark72);
+        placemarks.push(placemark72);
+        circles.push(circle72);
+        circleVisible.push(false);
+    
+
+        var placemark73 = new ymaps.Placemark([55.74959312775, 37.65240554074], {
+            balloonContent: 'IMEI: 864626047754236<br>Координаты: 55.74959312775, 37.65240554074<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.65240554074%2C55.74959312775&z=15&l=map&pt=37.65240554074,55.74959312775,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(73)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle73 = new ymaps.Circle([[55.74959312775, 37.65240554074], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark73);
+        placemarks.push(placemark73);
+        circles.push(circle73);
+        circleVisible.push(false);
+    
+
+        var placemark74 = new ymaps.Placemark([55.74798965454102, 37.53300094604492], {
+            balloonContent: 'IMEI: 864626047757395<br>Координаты: 55.74798965454102, 37.53300094604492<br>Радиус: 666.3950805664062 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.53300094604492%2C55.74798965454102&z=15&l=map&pt=37.53300094604492,55.74798965454102,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(74)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle74 = new ymaps.Circle([[55.74798965454102, 37.53300094604492], 666.3950805664062], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark74);
+        placemarks.push(placemark74);
+        circles.push(circle74);
+        circleVisible.push(false);
+    
+
+        var placemark75 = new ymaps.Placemark([55.74856958515, 37.53305915247], {
+            balloonContent: 'IMEI: 864626047757395<br>Координаты: 55.74856958515, 37.53305915247<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.53305915247%2C55.74856958515&z=15&l=map&pt=37.53305915247,55.74856958515,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(75)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle75 = new ymaps.Circle([[55.74856958515, 37.53305915247], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark75);
+        placemarks.push(placemark75);
+        circles.push(circle75);
+        circleVisible.push(false);
+    
+
+        var placemark76 = new ymaps.Placemark([55.73526000976562, 37.587890625], {
+            balloonContent: 'IMEI: 866011051383065<br>Координаты: 55.73526000976562, 37.587890625<br>Радиус: 157.218994140625 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.587890625%2C55.73526000976562&z=15&l=map&pt=37.587890625,55.73526000976562,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(76)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle76 = new ymaps.Circle([[55.73526000976562, 37.587890625], 157.218994140625], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark76);
+        placemarks.push(placemark76);
+        circles.push(circle76);
+        circleVisible.push(false);
+    
+
+        var placemark77 = new ymaps.Placemark([55.7354415963, 37.59009669464], {
+            balloonContent: 'IMEI: 866011051383065<br>Координаты: 55.7354415963, 37.59009669464<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.59009669464%2C55.7354415963&z=15&l=map&pt=37.59009669464,55.7354415963,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(77)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle77 = new ymaps.Circle([[55.7354415963, 37.59009669464], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark77);
+        placemarks.push(placemark77);
+        circles.push(circle77);
+        circleVisible.push(false);
+    
+
+        var placemark78 = new ymaps.Placemark([60.0128288269043, 30.47694396972656], {
+            balloonContent: 'IMEI: 866011051379485<br>Координаты: 60.0128288269043, 30.47694396972656<br>Радиус: 648.109130859375 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=30.47694396972656%2C60.0128288269043&z=15&l=map&pt=30.47694396972656,60.0128288269043,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(78)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle78 = new ymaps.Circle([[60.0128288269043, 30.47694396972656], 648.109130859375], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark78);
+        placemarks.push(placemark78);
+        circles.push(circle78);
+        circleVisible.push(false);
+    
+
+        var placemark79 = new ymaps.Placemark([60.00167644088, 30.41670441635], {
+            balloonContent: 'IMEI: 866011051379485<br>Координаты: 60.00167644088, 30.41670441635<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=30.41670441635%2C60.00167644088&z=15&l=map&pt=30.41670441635,60.00167644088,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(79)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle79 = new ymaps.Circle([[60.00167644088, 30.41670441635], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark79);
+        placemarks.push(placemark79);
+        circles.push(circle79);
+        circleVisible.push(false);
+    
+
+        var placemark80 = new ymaps.Placemark([55.69379425048828, 37.53721237182617], {
+            balloonContent: 'IMEI: 866011051383602<br>Координаты: 55.69379425048828, 37.53721237182617<br>Радиус: 170.3465270996094 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.53721237182617%2C55.69379425048828&z=15&l=map&pt=37.53721237182617,55.69379425048828,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(80)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle80 = new ymaps.Circle([[55.69379425048828, 37.53721237182617], 170.3465270996094], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark80);
+        placemarks.push(placemark80);
+        circles.push(circle80);
+        circleVisible.push(false);
+    
+
+        var placemark81 = new ymaps.Placemark([55.6923899619, 37.53642798392], {
+            balloonContent: 'IMEI: 866011051383602<br>Координаты: 55.6923899619, 37.53642798392<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.53642798392%2C55.6923899619&z=15&l=map&pt=37.53642798392,55.6923899619,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(81)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle81 = new ymaps.Circle([[55.6923899619, 37.53642798392], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark81);
+        placemarks.push(placemark81);
+        circles.push(circle81);
+        circleVisible.push(false);
+    
+
+        var placemark82 = new ymaps.Placemark([59.77162933349609, 30.23428153991699], {
+            balloonContent: 'IMEI: 866011051391720<br>Координаты: 59.77162933349609, 30.23428153991699<br>Радиус: 847.4873657226562 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=30.23428153991699%2C59.77162933349609&z=15&l=map&pt=30.23428153991699,59.77162933349609,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(82)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle82 = new ymaps.Circle([[59.77162933349609, 30.23428153991699], 847.4873657226562], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark82);
+        placemarks.push(placemark82);
+        circles.push(circle82);
+        circleVisible.push(false);
+    
+
+        var placemark83 = new ymaps.Placemark([59.77542912952, 30.13147406165], {
+            balloonContent: 'IMEI: 866011051391720<br>Координаты: 59.77542912952, 30.13147406165<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=30.13147406165%2C59.77542912952&z=15&l=map&pt=30.13147406165,59.77542912952,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(83)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle83 = new ymaps.Circle([[59.77542912952, 30.13147406165], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark83);
+        placemarks.push(placemark83);
+        circles.push(circle83);
+        circleVisible.push(false);
+    
+
+        var placemark84 = new ymaps.Placemark([55.76424026489258, 37.68251037597656], {
+            balloonContent: 'IMEI: 866897054213998<br>Координаты: 55.76424026489258, 37.68251037597656<br>Радиус: 710.147216796875 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.68251037597656%2C55.76424026489258&z=15&l=map&pt=37.68251037597656,55.76424026489258,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(84)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle84 = new ymaps.Circle([[55.76424026489258, 37.68251037597656], 710.147216796875], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark84);
+        placemarks.push(placemark84);
+        circles.push(circle84);
+        circleVisible.push(false);
+    
+
+        var placemark85 = new ymaps.Placemark([55.76158945302, 37.68087916476], {
+            balloonContent: 'IMEI: 866897054213998<br>Координаты: 55.76158945302, 37.68087916476<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.68087916476%2C55.76158945302&z=15&l=map&pt=37.68087916476,55.76158945302,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(85)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle85 = new ymaps.Circle([[55.76158945302, 37.68087916476], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark85);
+        placemarks.push(placemark85);
+        circles.push(circle85);
+        circleVisible.push(false);
+    
+
+        var placemark86 = new ymaps.Placemark([55.75745010375977, 37.54842758178711], {
+            balloonContent: 'IMEI: 866897054227998<br>Координаты: 55.75745010375977, 37.54842758178711<br>Радиус: 930.812255859375 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.54842758178711%2C55.75745010375977&z=15&l=map&pt=37.54842758178711,55.75745010375977,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(86)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle86 = new ymaps.Circle([[55.75745010375977, 37.54842758178711], 930.812255859375], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark86);
+        placemarks.push(placemark86);
+        circles.push(circle86);
+        circleVisible.push(false);
+    
+
+        var placemark87 = new ymaps.Placemark([55.7550112022, 37.55026098997], {
+            balloonContent: 'IMEI: 866897054227998<br>Координаты: 55.7550112022, 37.55026098997<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.55026098997%2C55.7550112022&z=15&l=map&pt=37.55026098997,55.7550112022,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(87)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle87 = new ymaps.Circle([[55.7550112022, 37.55026098997], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark87);
+        placemarks.push(placemark87);
+        circles.push(circle87);
+        circleVisible.push(false);
+    
+
+        var placemark88 = new ymaps.Placemark([55.53113174438477, 38.874755859375], {
+            balloonContent: 'IMEI: 866897054228707<br>Координаты: 55.53113174438477, 38.874755859375<br>Радиус: 100000.0 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=38.874755859375%2C55.53113174438477&z=15&l=map&pt=38.874755859375,55.53113174438477,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(88)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle88 = new ymaps.Circle([[55.53113174438477, 38.874755859375], 100000.0], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark88);
+        placemarks.push(placemark88);
+        circles.push(circle88);
+        circleVisible.push(false);
+    
+
+        var placemark89 = new ymaps.Placemark([55.84861608476, 37.53494522156], {
+            balloonContent: 'IMEI: 866897054228707<br>Координаты: 55.84861608476, 37.53494522156<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.53494522156%2C55.84861608476&z=15&l=map&pt=37.53494522156,55.84861608476,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(89)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle89 = new ymaps.Circle([[55.84861608476, 37.53494522156], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark89);
+        placemarks.push(placemark89);
+        circles.push(circle89);
+        circleVisible.push(false);
+    
+
+        var placemark90 = new ymaps.Placemark([55.74812698364258, 37.63254165649414], {
+            balloonContent: 'IMEI: 866897054151339<br>Координаты: 55.74812698364258, 37.63254165649414<br>Радиус: 547.3963623046875 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.63254165649414%2C55.74812698364258&z=15&l=map&pt=37.63254165649414,55.74812698364258,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(90)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle90 = new ymaps.Circle([[55.74812698364258, 37.63254165649414], 547.3963623046875], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark90);
+        placemarks.push(placemark90);
+        circles.push(circle90);
+        circleVisible.push(false);
+    
+
+        var placemark91 = new ymaps.Placemark([55.75603448378, 37.62406281218], {
+            balloonContent: 'IMEI: 866897054151339<br>Координаты: 55.75603448378, 37.62406281218<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.62406281218%2C55.75603448378&z=15&l=map&pt=37.62406281218,55.75603448378,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(91)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle91 = new ymaps.Circle([[55.75603448378, 37.62406281218], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark91);
+        placemarks.push(placemark91);
+        circles.push(circle91);
+        circleVisible.push(false);
+    
+
+        var placemark92 = new ymaps.Placemark([55.74481964111328, 37.61710357666016], {
+            balloonContent: 'IMEI: 866897056048145<br>Координаты: 55.74481964111328, 37.61710357666016<br>Радиус: 613.5639038085938 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.61710357666016%2C55.74481964111328&z=15&l=map&pt=37.61710357666016,55.74481964111328,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(92)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle92 = new ymaps.Circle([[55.74481964111328, 37.61710357666016], 613.5639038085938], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark92);
+        placemarks.push(placemark92);
+        circles.push(circle92);
+        circleVisible.push(false);
+    
+
+        var placemark93 = new ymaps.Placemark([55.75034036392, 37.61109402411], {
+            balloonContent: 'IMEI: 866897056048145<br>Координаты: 55.75034036392, 37.61109402411<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.61109402411%2C55.75034036392&z=15&l=map&pt=37.61109402411,55.75034036392,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(93)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle93 = new ymaps.Circle([[55.75034036392, 37.61109402411], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark93);
+        placemarks.push(placemark93);
+        circles.push(circle93);
+        circleVisible.push(false);
+    
+
+        var placemark94 = new ymaps.Placemark([55.80983734130859, 37.72993469238281], {
+            balloonContent: 'IMEI: 866897056172796<br>Координаты: 55.80983734130859, 37.72993469238281<br>Радиус: 674.7349853515625 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.72993469238281%2C55.80983734130859&z=15&l=map&pt=37.72993469238281,55.80983734130859,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(94)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle94 = new ymaps.Circle([[55.80983734130859, 37.72993469238281], 674.7349853515625], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark94);
+        placemarks.push(placemark94);
+        circles.push(circle94);
+        circleVisible.push(false);
+    
+
+        var placemark95 = new ymaps.Placemark([55.81158058891, 37.7318957761], {
+            balloonContent: 'IMEI: 866897056172796<br>Координаты: 55.81158058891, 37.7318957761<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.7318957761%2C55.81158058891&z=15&l=map&pt=37.7318957761,55.81158058891,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(95)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle95 = new ymaps.Circle([[55.81158058891, 37.7318957761], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark95);
+        placemarks.push(placemark95);
+        circles.push(circle95);
+        circleVisible.push(false);
+    
+
+        var placemark96 = new ymaps.Placemark([55.91839218139648, 37.88055038452148], {
+            balloonContent: 'IMEI: 869627030157341<br>Координаты: 55.91839218139648, 37.88055038452148<br>Радиус: 1004.625793457031 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.88055038452148%2C55.91839218139648&z=15&l=map&pt=37.88055038452148,55.91839218139648,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(96)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle96 = new ymaps.Circle([[55.91839218139648, 37.88055038452148], 1004.625793457031], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark96);
+        placemarks.push(placemark96);
+        circles.push(circle96);
+        circleVisible.push(false);
+    
+
+        var placemark97 = new ymaps.Placemark([55.9174284246, 37.88295493904], {
+            balloonContent: 'IMEI: 869627030157341<br>Координаты: 55.9174284246, 37.88295493904<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.88295493904%2C55.9174284246&z=15&l=map&pt=37.88295493904,55.9174284246,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(97)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle97 = new ymaps.Circle([[55.9174284246, 37.88295493904], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark97);
+        placemarks.push(placemark97);
+        circles.push(circle97);
+        circleVisible.push(false);
+    
+
+        var placemark98 = new ymaps.Placemark([59.86227035522461, 30.32257843017578], {
+            balloonContent: 'IMEI: 869696045822397<br>Координаты: 59.86227035522461, 30.32257843017578<br>Радиус: 775.4218139648438 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=30.32257843017578%2C59.86227035522461&z=15&l=map&pt=30.32257843017578,59.86227035522461,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(98)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle98 = new ymaps.Circle([[59.86227035522461, 30.32257843017578], 775.4218139648438], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark98);
+        placemarks.push(placemark98);
+        circles.push(circle98);
+        circleVisible.push(false);
+    
+
+        var placemark99 = new ymaps.Placemark([59.86086668015, 30.32135040453], {
+            balloonContent: 'IMEI: 869696045822397<br>Координаты: 59.86086668015, 30.32135040453<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=30.32135040453%2C59.86086668015&z=15&l=map&pt=30.32135040453,59.86086668015,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(99)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle99 = new ymaps.Circle([[59.86086668015, 30.32135040453], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark99);
+        placemarks.push(placemark99);
+        circles.push(circle99);
+        circleVisible.push(false);
+    
+
+        var placemark100 = new ymaps.Placemark([55.76855850219727, 37.60386276245117], {
+            balloonContent: 'IMEI: 869696045823270<br>Координаты: 55.76855850219727, 37.60386276245117<br>Радиус: 731.4581909179688 м<br>Сервис: Yandex<br><a href="https://yandex.ru/maps/?ll=37.60386276245117%2C55.76855850219727&z=15&l=map&pt=37.60386276245117,55.76855850219727,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(100)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#redIcon'
+        });
+        var circle100 = new ymaps.Circle([[55.76855850219727, 37.60386276245117], 731.4581909179688], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark100);
+        placemarks.push(placemark100);
+        circles.push(circle100);
+        circleVisible.push(false);
+    
+
+        var placemark101 = new ymaps.Placemark([55.76594112144, 37.60574895489], {
+            balloonContent: 'IMEI: 869696045823270<br>Координаты: 55.76594112144, 37.60574895489<br>Радиус: 500 м<br>Сервис: Mylnikov<br><a href="https://yandex.ru/maps/?ll=37.60574895489%2C55.76594112144&z=15&l=map&pt=37.60574895489,55.76594112144,pm2dgl" target="_blank">Посмотреть на Яндекс.Картах</a><br><button onclick="toggleCircleVisibility(101)">Показать радиус</button>' 
+        }, {
+            preset: 'islands#blueIcon'
+        });
+        var circle101 = new ymaps.Circle([[55.76594112144, 37.60574895489], 500], null, {
+            draggable: false,
+            fillColor: 'rgba(0,0,0,0)',
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.5,
+            strokeWidth: 5
+        });
+        myMap.geoObjects.add(placemark101);
+        placemarks.push(placemark101);
+        circles.push(circle101);
+        circleVisible.push(false);
+    
+                    var bounds = myMap.geoObjects.getBounds();
+                    if (bounds) {
+                        myMap.setBounds(bounds, { checkZoomRange: true, zoomMargin: 50 }).then(function() {
+                            if (myMap.getZoom() > 10) {
+                                myMap.setZoom(10);
+                            }
+                        });
+                    }
+                }
+
+                function toggleService(service) {
+                    if (service === 'Yandex') {
+                        yandexVisible = !yandexVisible;
+                        for (var i = 0; i < placemarks.length; i++) {
+                            if (placemarks[i].options.get('preset') === 'islands#redIcon') {
+                                if (yandexVisible) {
+                                    myMap.geoObjects.add(placemarks[i]);
+                                    if (circleVisible[i]) {
+                                        myMap.geoObjects.add(circles[i]);
+                                    }
+                                } else {
+                                    myMap.geoObjects.remove(placemarks[i]);
+                                    myMap.geoObjects.remove(circles[i]);
+                                }
+                            }
+                        }
+                    } else if (service === 'Mylnikov') {
+                        mylnikovVisible = !mylnikovVisible;
+                        for (var i = 0; i < placemarks.length; i++) {
+                            if (placemarks[i].options.get('preset') === 'islands#blueIcon') {
+                                if (mylnikovVisible) {
+                                    myMap.geoObjects.add(placemarks[i]);
+                                    if (circleVisible[i]) {
+                                        myMap.geoObjects.add(circles[i]);
+                                    }
+                                } else {
+                                    myMap.geoObjects.remove(placemarks[i]);
+                                    myMap.geoObjects.remove(circles[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                function searchByIMEI() {
+                    var imeiInput = document.getElementById('imeiSearch').value;
+                    for (var i = 0; i < placemarks.length; i++) {
+                        var balloonContent = placemarks[i].properties.get('balloonContent');
+                        if (balloonContent.includes('IMEI: ' + imeiInput)) {
+                            placemarks[i].options.set('preset', 'islands#yellowIcon');
+                            myMap.setCenter(placemarks[i].geometry.getCoordinates(), 15);
+                        } else {
+                            placemarks[i].options.set('preset', placemarks[i].options.get('preset').includes('red') ? 'islands#redIcon' : 'islands#blueIcon');
+                        }
+                    }
+                }
+
+                function toggleCircleVisibility(index) {
+                    if (circleVisible[index]) {
+                        myMap.geoObjects.remove(circles[index]);
+                        placemarks[index].properties.set('balloonContent', placemarks[index].properties.get('balloonContent').replace('Скрыть радиус', 'Показать радиус'));
+                    } else {
+                        myMap.geoObjects.add(circles[index]);
+                        placemarks[index].properties.set('balloonContent', placemarks[index].properties.get('balloonContent').replace('Показать радиус', 'Скрыть радиус'));
+                    }
+                    circleVisible[index] = !circleVisible[index];
+                }
+
+                function removeTower(index) {
+                    myMap.geoObjects.remove(placemarks[index]);
+                    myMap.geoObjects.remove(circles[index]);
+                }
+            </script>
+        </body>
+        </html>
+    
