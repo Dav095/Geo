@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Карта O2R</title>
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+  <style>
+    body, html { margin: 0; padding: 0; width: 100%; height: 100%; }
+    #map { width: 100%; height: 100%; }
+    .balloon { font-family: Arial, sans-serif; padding: 10px; max-width: 300px; }
+    .balloon-title { font-weight: bold; margin-bottom: 5px; color: #1a73e8; }
+    .balloon-content { font-size: 14px; }
+    .balloon-row { margin-bottom: 3px; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+    ymaps.ready(initMap);
+    
+    function initMap() {
+      const points = [{"coords":[55.78498458862305,37.54023361206055],"color":"islands#redIcon","source":"Вышка O2R","radius":906,"imei":860103062834115,"vehicleName":"Nissan Qashqai р961вк797","vehicleNumber":"device(imei 862430054352519, pin \"23234545\")","type":"tower"},{"coords":[55.64331817626953,37.757476806640625],"color":"islands#redIcon","source":"Вышка O2R","radius":988,"imei":860103062903076,"vehicleName":"Chery Tiggo 7 Pro о436ом797","vehicleNumber":"device(imei 860103063340658, pin \"90907878\")","type":"tower"},{"coords":[55.82894515991211,37.3759765625],"color":"islands#redIcon","source":"Вышка O2R","radius":1207,"imei":860103063792627,"vehicleName":"Kia Soul у868ка797","vehicleNumber":"device(imei 862430054305046, pin \"23234545\")","type":"tower"},{"coords":[55.85616683959961,37.551788330078125],"color":"islands#redIcon","source":"Вышка O2R","radius":1222,"imei":861100067947982,"vehicleName":"Coolray (BelGee) е233то797","vehicleNumber":"device(imei 866011051818037, pin \"45452323\")","type":"tower"},{"coords":[55.76639175415039,37.69984436035156],"color":"islands#redIcon","source":"Вышка O2R","radius":959,"imei":861100067956140,"vehicleName":"Changan UNI-V е292рр797","vehicleNumber":"device(imei 866011051894111, pin \"45452323\")","type":"tower"},{"coords":[55.7824,37.7357],"color":"islands#blueIcon","source":"Блок O2R","imei":862430050887559,"vehicleName":"Coolray (BelGee) е376те797","vehicleNumber":"device(imei 866011051956324, pin \"45452323\")","type":"block"},{"coords":[55.785091400146484,37.73878479003906],"color":"islands#redIcon","source":"Вышка O2R","radius":1408,"imei":862430050887559,"vehicleName":"Coolray (BelGee) е376те797","vehicleNumber":"device(imei 866011051956324, pin \"45452323\")","type":"tower"},{"coords":[55.8787,37.4225],"color":"islands#blueIcon","source":"Блок O2R","imei":862430054302621,"vehicleName":"Nissan Qashqai т469вн797","vehicleNumber":"device(imei 862430054350182, pin \"23234545\")","type":"block"},{"coords":[55.87948989868164,37.4234619140625],"color":"islands#redIcon","source":"Вышка O2R","radius":1181,"imei":862430054302621,"vehicleName":"Nissan Qashqai т469вн797","vehicleNumber":"device(imei 862430054350182, pin \"23234545\")","type":"tower"},{"coords":[55.778778076171875,37.603919982910156],"color":"islands#redIcon","source":"Вышка O2R","radius":908,"imei":862430054350901,"vehicleName":"Kia Rio м024тх797","vehicleNumber":"device(imei 864626047756751, pin \"2014\")","type":"tower"},{"coords":[45.098663330078125,38.973270416259766],"color":"islands#redIcon","source":"Вышка O2R","radius":674,"imei":862430054364324,"vehicleName":"Chery Tiggo 7 Pro к617му797","vehicleNumber":"device(imei 866897056028188, pin \"23234545\")","type":"tower"},{"coords":[55.7374,37.5255],"color":"islands#blueIcon","source":"Блок O2R","imei":862430054378092,"vehicleName":"Geely Coolray у526нх797","vehicleNumber":"device(imei 862430054378092, pin \"23234545\")","type":"block"},{"coords":[55.73777389526367,37.52381134033203],"color":"islands#redIcon","source":"Вышка O2R","radius":1166,"imei":862430054378092,"vehicleName":"Geely Coolray у526нх797","vehicleNumber":"device(imei 862430054378092, pin \"23234545\")","type":"tower"},{"coords":[55.8006,37.4922],"color":"islands#blueIcon","source":"Блок O2R","imei":862430055916064,"vehicleName":"Chery Tiggo 7 Pro х961нт797","vehicleNumber":"device(imei 866897054213626, pin \"23234545\")","type":"block"},{"coords":[55.80059814453125,37.49039840698242],"color":"islands#redIcon","source":"Вышка O2R","radius":904,"imei":862430055916064,"vehicleName":"Chery Tiggo 7 Pro х961нт797","vehicleNumber":"device(imei 866897054213626, pin \"23234545\")","type":"tower"},{"coords":[55.7728,37.4656],"color":"islands#blueIcon","source":"Блок O2R","imei":862430056028505,"vehicleName":"Haval Jolion Elite в505кс797","vehicleNumber":"device(imei 866854050625204, pin \"1918\")","type":"block"},{"coords":[55.772727966308594,37.46617126464844],"color":"islands#redIcon","source":"Вышка O2R","radius":723,"imei":862430056028505,"vehicleName":"Haval Jolion Elite в505кс797","vehicleNumber":"device(imei 866854050625204, pin \"1918\")","type":"tower"},{"coords":[55.802589416503906,37.636192321777344],"color":"islands#redIcon","source":"Вышка O2R","radius":1188,"imei":862430056028968,"vehicleName":"Kia Rio а296ко797","vehicleNumber":"device(imei 864626045104160, pin \"2014\")","type":"tower"},{"coords":[55.71914291381836,37.67598342895508],"color":"islands#redIcon","source":"Вышка O2R","radius":832,"imei":862430056695329,"vehicleName":"Changan UNI-V е466рн797","vehicleNumber":"device(imei 866011051837151, pin \"45452323\")","type":"tower"},{"coords":[55.4742,37.7034],"color":"islands#blueIcon","source":"Блок O2R","imei":862430056699461,"vehicleName":"Geely Coolray р114не797","vehicleNumber":"device(imei 862430056028505, pin \"23234545\")","type":"block"},{"coords":[55.47284698486328,37.70317077636719],"color":"islands#redIcon","source":"Вышка O2R","radius":568,"imei":862430056699461,"vehicleName":"Geely Coolray р114не797","vehicleNumber":"device(imei 862430056028505, pin \"23234545\")","type":"tower"},{"coords":[55.74982833862305,37.65814208984375],"color":"islands#redIcon","source":"Вышка O2R","radius":791,"imei":862531047197166,"vehicleName":"Coolray (BelGee) н854со797","vehicleNumber":"device(imei 866011051419869, pin \"45452323\")","type":"tower"},{"coords":[47.2509,39.7738],"color":"islands#blueIcon","source":"Блок O2R","imei":864626045104244,"vehicleName":"Kia Rio н968ет797","vehicleNumber":"device(imei 862843046833141, pin \"1918\")","type":"block"},{"coords":[47.24840545654297,39.767940521240234],"color":"islands#redIcon","source":"Вышка O2R","radius":1309,"imei":864626045104244,"vehicleName":"Kia Rio н968ет797","vehicleNumber":"device(imei 862843046833141, pin \"1918\")","type":"tower"},{"coords":[55.532108306884766,37.622039794921875],"color":"islands#redIcon","source":"Вышка O2R","radius":1400,"imei":864626047756751,"vehicleName":"Geely Atlas Pro а865ор797","vehicleNumber":"device(imei 860103063164199, pin \"90907878\")","type":"tower"},{"coords":[55.45102310180664,37.7623176574707],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011051405272,"vehicleName":"Haval Jolion Elite е981вк797","vehicleNumber":"device(imei 862430054364324, pin \"23234545\")","type":"tower"},{"coords":[55.7374,37.5397],"color":"islands#blueIcon","source":"Блок O2R","imei":866011051405280,"vehicleName":"Chery Tiggo 7 Pro к443он797","vehicleNumber":"device(imei 860103063609649, pin \"90907878\")","type":"block"},{"coords":[55.73832321166992,37.53662872314453],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011051405280,"vehicleName":"Chery Tiggo 7 Pro к443он797","vehicleNumber":"device(imei 860103063609649, pin \"90907878\")","type":"tower"},{"coords":[59.5430793762207,30.864215850830078],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011051425767,"vehicleName":"Coolray (BelGee) н899рр797","vehicleNumber":"device(imei 860103062915229, pin \"90907878\")","type":"tower"},{"coords":[55.80543899536133,37.586578369140625],"color":"islands#redIcon","source":"Вышка O2R","radius":389,"imei":866011051433027,"vehicleName":"Kia Rio а315кв797","vehicleNumber":"device(imei 864626045105324, pin \"2014\")","type":"tower"},{"coords":[55.9084,37.2909],"color":"islands#blueIcon","source":"Блок O2R","imei":866011051451789,"vehicleName":"Chery Arrizo 8 а967рм797","vehicleNumber":"device(imei 866011051378610, pin \"45452323\")","type":"block"},{"coords":[55.818790435791016,37.7591667175293],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011051451789,"vehicleName":"Chery Arrizo 8 а967рм797","vehicleNumber":"device(imei 866011051378610, pin \"45452323\")","type":"tower"},{"coords":[55.7918586730957,37.522743225097656],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011051460517,"vehicleName":"Geely Atlas Pro т182нт797","vehicleNumber":"device(imei 861100067884813, pin \"90907878\")","type":"tower"},{"coords":[55.581642150878906,38.213157653808594],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011051837151,"vehicleName":"Jac JS6 с288нк797","vehicleNumber":"device(imei 862430056046127, pin \"23234545\")","type":"tower"},{"coords":[59.9324,30.2541],"color":"islands#blueIcon","source":"Блок O2R","imei":866011051894111,"vehicleName":"Kia Rio е467те797","vehicleNumber":"device(imei 864626045086342, pin \"2014\")","type":"block"},{"coords":[59.93241500854492,30.253841400146484],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011051894111,"vehicleName":"Kia Rio е467те797","vehicleNumber":"device(imei 864626045086342, pin \"2014\")","type":"tower"},{"coords":[55.7907,37.7519],"color":"islands#blueIcon","source":"Блок O2R","imei":866011052010055,"vehicleName":"Changan CS55 Plus к044ов797","vehicleNumber":"device(imei 860103063274527, pin \"90907878\")","type":"block"},{"coords":[55.7881965637207,37.75299835205078],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011052010055,"vehicleName":"Changan CS55 Plus к044ов797","vehicleNumber":"device(imei 860103063274527, pin \"90907878\")","type":"tower"},{"coords":[55.76669692993164,37.64430236816406],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011052038809,"vehicleName":"Chery Tiggo 7 Pro т201ов797","vehicleNumber":"device(imei 860103063794540, pin \"90907878\")","type":"tower"},{"coords":[55.4266,37.7561],"color":"islands#blueIcon","source":"Блок O2R","imei":866011052042934,"vehicleName":"Geely Coolray у518нх797","vehicleNumber":"device(imei 862430054378183, pin \"23234545\")","type":"block"},{"coords":[55.4256477355957,37.75838851928711],"color":"islands#redIcon","source":"Вышка O2R","radius":131,"imei":866011052042934,"vehicleName":"Geely Coolray у518нх797","vehicleNumber":"device(imei 862430054378183, pin \"23234545\")","type":"tower"},{"coords":[55.79188919067383,37.52701950073242],"color":"islands#redIcon","source":"Вышка O2R","radius":340,"imei":866011052365343,"vehicleName":"Chery Tiggo 7 Pro т134му797","vehicleNumber":"device(imei 862430050908082, pin \"23234545\")","type":"tower"},{"coords":[55.6307,38.069],"color":"islands#blueIcon","source":"Блок O2R","imei":866854054258200,"vehicleName":"Changan UNI-S р811ту797","vehicleNumber":"device(imei 866011051841500, pin \"45452323\")","type":"block"},{"coords":[55.79091262817383,37.81439208984375],"color":"islands#redIcon","source":"Вышка O2R","radius":587,"imei":866854054258200,"vehicleName":"Changan UNI-S р811ту797","vehicleNumber":"device(imei 866011051841500, pin \"45452323\")","type":"tower"},{"coords":[55.762054443359375,37.73917770385742],"color":"islands#redIcon","source":"Вышка O2R","radius":616,"imei":866897054220571,"vehicleName":"Haval Jolion Elite т998нр797","vehicleNumber":"device(imei 861100067955977, pin \"90907878\")","type":"tower"},{"coords":[55.9099,37.8416],"color":"islands#blueIcon","source":"Блок O2R","imei":866897056059647,"vehicleName":"Kia Rio р103кн797","vehicleNumber":"device(imei 864626047731366, pin \"2014\")","type":"block"},{"coords":[55.91413116455078,37.84501647949219],"color":"islands#redIcon","source":"Вышка O2R","radius":1202,"imei":866897056059647,"vehicleName":"Kia Rio р103кн797","vehicleNumber":"device(imei 864626047731366, pin \"2014\")","type":"tower"}];
+      const map = new ymaps.Map("map", {
+        center: [55.751574, 37.573856],
+        zoom: 10
+      });
+      
+      // Добавляем точки на карту
+      points.forEach(point => {
+        const placemark = new ymaps.Placemark(
+          point.coords,
+          {
+            balloonContentHeader: '<div class="balloon-title">' + point.source + '</div>',
+            balloonContentBody: `
+              <div class="balloon">
+                <div class="balloon-row"><strong>IMEI:</strong> ${point.imei}</div>
+                ${point.vehicleName ? '<div class="balloon-row"><strong>Машина:</strong> ' + point.vehicleName + '</div>' : ''}
+                ${point.vehicleNumber ? '<div class="balloon-row"><strong>Номер:</strong> ' + point.vehicleNumber + '</div>' : ''}
+                ${point.radius ? '<div class="balloon-row"><strong>Точность:</strong> ' + point.radius + ' м</div>' : ''}
+                <div class="balloon-row"><strong>Координаты:</strong> ${point.coords[0].toFixed(6)}, ${point.coords[1].toFixed(6)}</div>
+              </div>
+            `,
+            hintContent: point.source
+          },
+          {
+            preset: point.color,
+            balloonCloseButton: true,
+            balloonMaxWidth: 300
+          }
+        );
+        
+        // Для вышек добавляем круг точности
+        if (point.radius && point.type === "tower") {
+          const circle = new ymaps.Circle([
+            point.coords,
+            point.radius
+          ], {}, {
+            fillColor: "#FF0000",
+            fillOpacity: 0.1,
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWidth: 2
+          });
+          map.geoObjects.add(circle);
+        }
+        
+        map.geoObjects.add(placemark);
+      });
+      
+      // Автоматически подбираем масштаб и центр
+      if (points.length > 0) {
+        map.setBounds(map.geoObjects.getBounds(), { checkZoomRange: true });
+      }
+    }
+  </script>
+</body>
+</html>
